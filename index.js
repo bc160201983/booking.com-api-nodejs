@@ -1,5 +1,6 @@
 import express, { json } from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 import mongoose from "mongoose";
 import authRoute from "./routes/auth.js";
 import hotelsRoute from "./routes/hotels.js";
@@ -8,11 +9,12 @@ import usersRoute from "./routes/users.js";
 import cookieParser from "cookie-parser";
 
 dotenv.config();
+
 const app = express();
 app.use(express.json());
 
 app.use(cookieParser());
-
+app.use(cors());
 const connect = async () => {
   try {
     await mongoose.connect(process.env.mongodb);
